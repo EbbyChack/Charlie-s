@@ -1,0 +1,58 @@
+﻿@model EsercizioSettimana11Marzo.Models.Articolo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Articolo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Immagine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Immagine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prezzo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prezzo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TempiDiConsegna)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TempiDiConsegna)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ingredienti)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ingredienti)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdArticolo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
