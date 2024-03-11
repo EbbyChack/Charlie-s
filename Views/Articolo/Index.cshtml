@@ -1,57 +1,63 @@
 ﻿@model IEnumerable<EsercizioSettimana11Marzo.Models.Articolo>
+@*TOGLIERE LO STILE DA QUI*@
+<style>
+    .hoverCard {
+        opacity: 1%;
+        transition: all ease-in-out 0.5s;
+    }
 
-@{
-    ViewBag.Title = "Index";
-}
+    .Custom:hover .hoverCard {
+        opacity: 100%;
+        transition: all ease-in-out 0.5s;
+    }
+</style>
 
-<h2>Index</h2>
+<h2>Articoli</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Immagine)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prezzo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TempiDiConsegna)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ingredienti)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            <img src="@item.Immagine" alt="@item.IdArticolo" style="width:10em; height:10em; object-fit:cover" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prezzo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TempiDiConsegna)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ingredienti)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdArticolo }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdArticolo }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdArticolo })
-        </td>
-    </tr>
-}
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-3">
+                <div class="card Custom">
 
-</table>
+                    <img class="card-img " src="@item.Immagine" alt="@item.IdArticolo" style=" height:25em; object-fit:cover">
+                    <div class="card-img-overlay align-bottom">
+                        <h5 class="card-title text-white bg-dark bg-opacity-50 d-inline px-2 py-1 rounded-pill ">@item.Nome</h5>
+
+                        <div class="hoverCard card-body my-3 text-white bg-dark bg-opacity-75 px-2 py-3 rounded-3 d-flex flex-column justify-content-center align-items-center">
+                            <div>
+                                <b>Prezzo: </b> <p>@item.Prezzo</p>
+                                <b>Ingredienti: </b> <p> @item.Ingredienti</p>
+                                <b>Tempi di consegna: </b><p> @item.TempiDiConsegna minuti</p>
+                            </div>
+                            <div class="">
+                                <a href="@Url.Action("Edit", new { id = item.IdArticolo })" class="btn btn-outline-light">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="@Url.Action("Details", new { id = item.IdArticolo })" class="btn btn-outline-light">
+                                    <i class="fa fa-info-circle"></i>
+                                </a>
+                                <a href="@Url.Action("Delete", new { id = item.IdArticolo })" class="btn btn-outline-light">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        }
+
+    </div>
+</div>
