@@ -7,9 +7,11 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+   
+      
+   
 </head>
-<body>
+<body class="background">
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
             @Html.ActionLink("InForno", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
@@ -20,8 +22,28 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Articoli", "Index", "Articolo", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if(User.Identity.IsAuthenticated && (string)Session["Role"] == "ADMIN")
+                    {
+                        <li>@Html.ActionLink("Articoli", "Index", "Articolo", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    
                 </ul>
+            </div>
+            <div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <ul class="navbar-nav ">
+                        <li>@Html.ActionLink("Logout", "Logout", "Utente", new { area = "" }, new { @class = "nav-link btn btn-light py-1 text-black rounded-4" })</li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="navbar-nav">
+                        <li>@Html.ActionLink("Login", "Login", "Utente", new { area = "" }, new { @class = "nav-link btn btn-light py-1 text-black rounded-4" })</li>
+                    </ul>
+                }
+
+
             </div>
         </div>
     </nav>

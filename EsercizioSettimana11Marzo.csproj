@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArticoloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UtenteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -196,6 +197,8 @@
     <Content Include="Views\Articolo\Details.cshtml" />
     <Content Include="Views\Articolo\Edit.cshtml" />
     <Content Include="Views\Articolo\Index.cshtml" />
+    <Content Include="Views\Utente\Create.cshtml" />
+    <Content Include="Views\Utente\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

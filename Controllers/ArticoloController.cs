@@ -10,35 +10,61 @@ using EsercizioSettimana11Marzo.Models;
 
 namespace EsercizioSettimana11Marzo.Controllers
 {
+    
     public class ArticoloController : Controller
     {
         private ModelDbContext db = new ModelDbContext();
 
         // GET: Articolo
+        
         public ActionResult Index()
         {
-            return View(db.Articoloes.ToList());
+            if ((string)Session["Role"] == "ADMIN")
+            {
+                return View(db.Articoloes.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         // GET: Articolo/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if ((string)Session["Role"] == "ADMIN")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Articolo articolo = db.Articoloes.Find(id);
+                if (articolo == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(articolo);
             }
-            Articolo articolo = db.Articoloes.Find(id);
-            if (articolo == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Home");
             }
-            return View(articolo);
+
         }
 
         // GET: Articolo/Create
         public ActionResult Create()
         {
-            return View();
+            if ((string)Session["Role"] == "ADMIN")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
 
         // POST: Articolo/Create
@@ -48,29 +74,45 @@ namespace EsercizioSettimana11Marzo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "IdArticolo,Nome,Immagine,Prezzo,TempiDiConsegna,Ingredienti")] Articolo articolo)
         {
-            if (ModelState.IsValid)
+            if ((string)Session["Role"] == "ADMIN")
             {
-                db.Articoloes.Add(articolo);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    db.Articoloes.Add(articolo);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            return View(articolo);
+                return View(articolo);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
 
         // GET: Articolo/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            if ((string)Session["Role"] == "ADMIN")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Articolo articolo = db.Articoloes.Find(id);
+                if (articolo == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(articolo);
             }
-            Articolo articolo = db.Articoloes.Find(id);
-            if (articolo == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Home");
             }
-            return View(articolo);
+           
         }
 
         // POST: Articolo/Edit/5
@@ -80,28 +122,44 @@ namespace EsercizioSettimana11Marzo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IdArticolo,Nome,Immagine,Prezzo,TempiDiConsegna,Ingredienti")] Articolo articolo)
         {
-            if (ModelState.IsValid)
+            if ((string)Session["Role"] == "ADMIN")
             {
-                db.Entry(articolo).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(articolo).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(articolo);
             }
-            return View(articolo);
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
 
         // GET: Articolo/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if ((string)Session["Role"] == "ADMIN")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Articolo articolo = db.Articoloes.Find(id);
+                if (articolo == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(articolo);
             }
-            Articolo articolo = db.Articoloes.Find(id);
-            if (articolo == null)
+            else
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Home");
             }
-            return View(articolo);
+           
         }
 
         // POST: Articolo/Delete/5
@@ -109,10 +167,18 @@ namespace EsercizioSettimana11Marzo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Articolo articolo = db.Articoloes.Find(id);
-            db.Articoloes.Remove(articolo);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if ((string)Session["Role"] == "ADMIN")
+            {
+                Articolo articolo = db.Articoloes.Find(id);
+                db.Articoloes.Remove(articolo);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         protected override void Dispose(bool disposing)

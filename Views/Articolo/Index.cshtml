@@ -12,10 +12,10 @@
     }
 </style>
 
-<h2>Articoli</h2>
+<h2>Modifica articoli</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+<p class="text-end">
+    @Html.ActionLink("Aggiungi", "Create",null, new { @class = "btn btn-outline-dark"} )
 </p>
 
 <div class="container">
@@ -23,11 +23,11 @@
         @foreach (var item in Model)
         {
             <div class="col-3">
-                <div class="card Custom">
+                <div class="card Custom border border-0">
 
                     <img class="card-img " src="@item.Immagine" alt="@item.IdArticolo" style=" height:25em; object-fit:cover">
                     <div class="card-img-overlay align-bottom">
-                        <h5 class="card-title text-white bg-dark bg-opacity-50 d-inline px-2 py-1 rounded-pill ">@item.Nome</h5>
+                        <h5 class="card-title text-white bg-dark bg-opacity-50 d-inline px-2 py-1 rounded-pill  ">@item.Nome</h5>
 
                         <div class="hoverCard card-body my-3 text-white bg-dark bg-opacity-75 px-2 py-3 rounded-3 d-flex flex-column justify-content-center align-items-center">
                             <div>

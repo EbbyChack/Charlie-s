@@ -28,7 +28,7 @@ namespace EsercizioSettimana11Marzo.Models
 
         [Required]
         [StringLength(50)]
-        public string TipoUtente { get; set; }
+        public string TipoUtente { get; set; } = "USER";
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ordine> Ordines { get; set; }
