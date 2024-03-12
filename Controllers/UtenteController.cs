@@ -65,7 +65,12 @@ namespace EsercizioSettimana11Marzo.Controllers
                     if (utenteLoggato != null)
                     {
                         FormsAuthentication.SetAuthCookie(utente.Username, false);
-                        Session["Role"] = utenteLoggato.TipoUtente;
+                        //Session["Role"] = utenteLoggato.TipoUtente;
+                        if (!Roles.RoleExists(utenteLoggato.TipoUtente))
+                        {
+                            Roles.CreateRole(utenteLoggato.TipoUtente);
+                        }
+                        Roles.AddUserToRole(utente.Username, utenteLoggato.TipoUtente);
                         return RedirectToAction("Index", "Home");
                     }
                     else
@@ -84,17 +89,10 @@ namespace EsercizioSettimana11Marzo.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            Session.Remove("Role");
+            Roles.RemoveUserFromRole(User.Identity.Name, Roles.GetRolesForUser(User.Identity.Name).First());
             //ti riporta alla pagina dove ti trovavi
             return Redirect(Request.UrlReferrer.ToString());
         }
-
-
-
-
-
-
-
 
 
 

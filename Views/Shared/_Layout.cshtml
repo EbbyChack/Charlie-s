@@ -7,14 +7,40 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-   
+   <style>
+       .background {
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           min-height: 100%;
+           background-image: url("https://www.1950americandiner.it/media/mobile/home-slide-03.jpg");
+           background-size: cover;
+           -webkit-backdrop-filter: inherit;
+           backdrop-filter: blur(100px) saturate(60%);
+           
+       }
+       #logo {
+           width: 6em;
+           filter: saturate(50%) 
+       }
+       .customNav {
+           background-color: #84283E;
+           background-image: linear-gradient( #6d66b9, #9967b7, #bd6aaf, #d96fa4, #ee7998 70%);
+           
+       }
+   </style>
       
    
 </head>
 <body class="background">
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark customNav">
         <div class="container">
-            @Html.ActionLink("InForno", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <a href="@Url.Action("Index", "Home", new { area = "" })" class="navbar-brand">
+                
+                <img src="https://assets-global.website-files.com/60749699ffd76a662120d3a3/609930020cc75a2fd0ba0a93_Charlies.png" alt="Charlie's" id="logo"/>
+            </a>
+
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -22,17 +48,21 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    @if(User.Identity.IsAuthenticated && (string)Session["Role"] == "ADMIN")
+                    @if (User.Identity.IsAuthenticated && Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
                     {
                         <li>@Html.ActionLink("Articoli", "Index", "Articolo", new { area = "" }, new { @class = "nav-link" })</li>
                     }
-                    
+
                 </ul>
             </div>
-            <div>
+            <div class="">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <ul class="navbar-nav ">
+
+                    <ul class="navbar-nav d-flex jus align-items-center">
+                        <li> <span class="text-white fw-bold px-2 ">Ciao @User.Identity.Name</span></li>
+
+
                         <li>@Html.ActionLink("Logout", "Logout", "Utente", new { area = "" }, new { @class = "nav-link btn btn-light py-1 text-black rounded-4" })</li>
                     </ul>
                 }

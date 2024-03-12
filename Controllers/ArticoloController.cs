@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using EsercizioSettimana11Marzo.Models;
 
 namespace EsercizioSettimana11Marzo.Controllers
@@ -19,7 +20,7 @@ namespace EsercizioSettimana11Marzo.Controllers
         
         public ActionResult Index()
         {
-            if ((string)Session["Role"] == "ADMIN")
+            if (Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
             {
                 return View(db.Articoloes.ToList());
             }
@@ -33,7 +34,7 @@ namespace EsercizioSettimana11Marzo.Controllers
         // GET: Articolo/Details/5
         public ActionResult Details(int? id)
         {
-            if ((string)Session["Role"] == "ADMIN")
+            if (Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
             {
                 if (id == null)
                 {
@@ -56,7 +57,7 @@ namespace EsercizioSettimana11Marzo.Controllers
         // GET: Articolo/Create
         public ActionResult Create()
         {
-            if ((string)Session["Role"] == "ADMIN")
+            if (Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
             {
                 return View();
             }
@@ -74,7 +75,7 @@ namespace EsercizioSettimana11Marzo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "IdArticolo,Nome,Immagine,Prezzo,TempiDiConsegna,Ingredienti")] Articolo articolo)
         {
-            if ((string)Session["Role"] == "ADMIN")
+            if (Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
             {
                 if (ModelState.IsValid)
                 {
@@ -95,7 +96,7 @@ namespace EsercizioSettimana11Marzo.Controllers
         // GET: Articolo/Edit/5
         public ActionResult Edit(int? id)
         {
-            if ((string)Session["Role"] == "ADMIN")
+            if (Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
             {
                 if (id == null)
                 {
@@ -122,7 +123,7 @@ namespace EsercizioSettimana11Marzo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IdArticolo,Nome,Immagine,Prezzo,TempiDiConsegna,Ingredienti")] Articolo articolo)
         {
-            if ((string)Session["Role"] == "ADMIN")
+            if (Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
             {
                 if (ModelState.IsValid)
                 {
@@ -142,7 +143,7 @@ namespace EsercizioSettimana11Marzo.Controllers
         // GET: Articolo/Delete/5
         public ActionResult Delete(int? id)
         {
-            if ((string)Session["Role"] == "ADMIN")
+            if (Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
             {
                 if (id == null)
                 {
@@ -167,7 +168,7 @@ namespace EsercizioSettimana11Marzo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            if ((string)Session["Role"] == "ADMIN")
+            if (Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
             {
                 Articolo articolo = db.Articoloes.Find(id);
                 db.Articoloes.Remove(articolo);
