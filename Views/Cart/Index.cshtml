@@ -1,0 +1,42 @@
+﻿@model  List<Tuple<EsercizioSettimana11Marzo.Models.Articolo, int>>
+
+
+
+<h2>Carello</h2>
+
+
+   
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-12">
+                <div class="container bg-light bg-opacity-25 p-3 mx-5 my-1 rounded rounded-3">
+                    <div class="row">
+                        <div class="col-3">
+                            <img class="w-100 rounded rounded-3" src="@item.Item1.Immagine" alt="@item.Item1.IdArticolo" style="height:15em; object-fit:cover">
+                        </div>
+                        <div class="col-6">
+                            <div class="bg-dark bg-opacity-50 p-2 rounded rounded-3">
+                                <h4 class="text-dark text-decoration-underline ">@item.Item1.Nome</h4>
+                                <b>Prezzo: </b> <p>@item.Item1.Prezzo</p>
+                                <b>Ingredienti: </b> <p> @item.Item1.Ingredienti</p>
+                                <b>Tempi di consegna: </b><p> @item.Item1.TempiDiConsegna minuti</p>
+                            </div>
+                        </div>
+                        <div class="col-3 d-flex justify-content-center align-items-center">
+                            <div class="">
+                                <a href="@Url.Action("RimuoviCarello", "Cart", new { id = item.Item1.IdArticolo })" class="btn btn-outline-light">
+                                    Rimuovi dal carrello
+                                </a>
+                                <p class="text-center m-4">Quantity: @item.Item2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+

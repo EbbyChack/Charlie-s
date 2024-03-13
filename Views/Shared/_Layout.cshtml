@@ -21,19 +21,18 @@
            
        }
        #logo {
-           width: 6em;
+           width: 5.5em;
            filter: saturate(50%) 
        }
        .customNav {
            background-color: #84283E;
-           background-image: linear-gradient( #6d66b9, #9967b7, #bd6aaf, #d96fa4, #ee7998 70%);
-           
+           background: linear-gradient(180deg, hsla(344, 77%, 70%, 1) 0%, hsla(330, 24%, 53%, 1) 100%);
        }
    </style>
       
    
 </head>
-<body class="background">
+<body class="background text-light">
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark customNav">
         <div class="container">
             <a href="@Url.Action("Index", "Home", new { area = "" })" class="navbar-brand">
@@ -50,7 +49,13 @@
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     @if (User.Identity.IsAuthenticated && Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
                     {
-                        <li>@Html.ActionLink("Articoli", "Index", "Articolo", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Modifica Articoli", "Index", "Articolo", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Menù", "Prodotti", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        
                     }
 
                 </ul>
@@ -61,15 +66,16 @@
 
                     <ul class="navbar-nav d-flex jus align-items-center">
                         <li> <span class="text-white fw-bold px-2 ">Ciao @User.Identity.Name</span></li>
+                        <li>@Html.ActionLink("Carello", "Index", "Cart", new { area = "" }, new { @class = "nav-link" })</li>
 
+                        <li>@Html.ActionLink("Logout", "Logout", "Utente", new { area = "" }, new { @class = "nav-link btn btn-light py-1 text-black rounded-2" })</li>
 
-                        <li>@Html.ActionLink("Logout", "Logout", "Utente", new { area = "" }, new { @class = "nav-link btn btn-light py-1 text-black rounded-4" })</li>
                     </ul>
                 }
                 else
                 {
                     <ul class="navbar-nav">
-                        <li>@Html.ActionLink("Login", "Login", "Utente", new { area = "" }, new { @class = "nav-link btn btn-light py-1 text-black rounded-4" })</li>
+                        <li>@Html.ActionLink("Login", "Login", "Utente", new { area = "" }, new { @class = "nav-link btn btn-light py-1 text-black rounded-2" })</li>
                     </ul>
                 }
 

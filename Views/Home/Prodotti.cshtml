@@ -1,0 +1,63 @@
+﻿@model IEnumerable<EsercizioSettimana11Marzo.Models.Articolo>
+@*TOGLIERE LO STILE DA QUI*@
+<style>
+    .hoverCard {
+        opacity: 1%;
+        transition: all ease-in-out 0.5s;
+    }
+
+    .Custom:hover .hoverCard {
+        opacity: 100%;
+        transition: all ease-in-out 0.5s;
+    }
+</style>
+
+<h2>Menù</h2>
+
+<p class="text-end">
+    @Html.ActionLink("Aggiungi", "Create", null, new { @class = "btn btn-outline-dark" })
+</p>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-3">
+                <div class="card Custom border border-0">
+
+                    <img class="card-img " src="@item.Immagine" alt="@item.IdArticolo" style=" height:25em; object-fit:cover">
+                    <div class="card-img-overlay align-bottom">
+                        <h5 class="card-title text-white bg-dark bg-opacity-50 d-inline px-2 py-1 rounded-pill  ">@item.Nome</h5>
+
+                        <div class="hoverCard card-body my-3 text-white bg-dark bg-opacity-75 px-2 py-3 rounded-3 d-flex flex-column justify-content-center align-items-center">
+                            <div>
+                                <b>Prezzo: </b> <p>@item.Prezzo</p>
+                                <b>Ingredienti: </b> <p> @item.Ingredienti</p>
+                                <b>Tempi di consegna: </b><p> @item.TempiDiConsegna minuti</p>
+                            </div>
+                            <div class="">
+                                @using (Html.BeginForm("AggiungiCarello", "Cart", FormMethod.Post))
+                                {
+                                    @Html.Hidden("id", item.IdArticolo)
+                                    <input type="number" name="quantita" min="1" max="6" value="1" class="form-control-sm">
+                                    <input type="submit" value="Aggiungi al carrello" class="btn btn-outline-light">
+                                }
+
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        }
+
+    </div>
+</div>
+

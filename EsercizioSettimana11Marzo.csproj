@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArticoloController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UtenteController.cs" />
     <Compile Include="Global.asax.cs">
@@ -199,6 +200,8 @@
     <Content Include="Views\Articolo\Index.cshtml" />
     <Content Include="Views\Utente\Create.cshtml" />
     <Content Include="Views\Utente\Login.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Home\Prodotti.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
