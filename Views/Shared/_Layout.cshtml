@@ -66,7 +66,8 @@
 
                     <ul class="navbar-nav d-flex jus align-items-center">
                         <li> <span class="text-white fw-bold px-2 ">Ciao @User.Identity.Name</span></li>
-                        <li>@Html.ActionLink("Carello", "Index", "Cart", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li><a href="@Url.Action("Index", "Cart", new { area = "" })" class="nav-link">Carrello <i class="fas fa-shopping-cart"></i></a></li>
+
 
                         <li>@Html.ActionLink("Logout", "Logout", "Utente", new { area = "" }, new { @class = "nav-link btn btn-light py-1 text-black rounded-2" })</li>
 

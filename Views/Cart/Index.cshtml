@@ -2,41 +2,71 @@
 
 
 
-<h2>Carello</h2>
+<h2>Carrello</h2>
 
-
+@if (Model.Count == 0)
+{
+    <div class="m-5 p-5 text-center">
+        <h3>Il carrello è vuoto</h3>
+    </div>
    
-<div class="container">
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-12">
-                <div class="container bg-light bg-opacity-25 p-3 mx-5 my-1 rounded rounded-3">
-                    <div class="row">
-                        <div class="col-3">
-                            <img class="w-100 rounded rounded-3" src="@item.Item1.Immagine" alt="@item.Item1.IdArticolo" style="height:15em; object-fit:cover">
-                        </div>
-                        <div class="col-6">
-                            <div class="bg-dark bg-opacity-50 p-2 rounded rounded-3">
-                                <h4 class="text-dark text-decoration-underline ">@item.Item1.Nome</h4>
-                                <b>Prezzo: </b> <p>@item.Item1.Prezzo</p>
-                                <b>Ingredienti: </b> <p> @item.Item1.Ingredienti</p>
-                                <b>Tempi di consegna: </b><p> @item.Item1.TempiDiConsegna minuti</p>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-12">
+                    <div class="container bg-light bg-opacity-25 p-3 mx-5 my-1 rounded rounded-3">
+                        <div class="row">
+                            <div class="col-3">
+                                <img class="w-100 rounded rounded-3" src="@item.Item1.Immagine" alt="@item.Item1.IdArticolo" style="height:15em; object-fit:cover">
                             </div>
-                        </div>
-                        <div class="col-3 d-flex justify-content-center align-items-center">
-                            <div class="">
-                                <a href="@Url.Action("RimuoviCarello", "Cart", new { id = item.Item1.IdArticolo })" class="btn btn-outline-light">
-                                    Rimuovi dal carrello
-                                </a>
-                                <p class="text-center m-4">Quantity: @item.Item2</p>
+                            <div class="col-6">
+                                <div class="bg-dark bg-opacity-25 py-2 px-4 rounded rounded-3">
+                                    <h4 class=" text-decoration-underline ">@item.Item1.Nome</h4>
+                                    <b>Prezzo: </b> <p>@item.Item1.Prezzo</p>
+                                    <b>Ingredienti: </b> <p> @item.Item1.Ingredienti</p>
+                                    <b>Tempi di consegna: </b><p> @item.Item1.TempiDiConsegna minuti</p>
+                                </div>
+                            </div>
+                            <div class="col-3 d-flex justify-content-center align-items-center">
+                                <div class="">
+                                    <p class="text-center m-4">Quantità: @item.Item2</p>
+                                    <a href="@Url.Action("RimuoviCarello", "Cart", new { id = item.Item1.IdArticolo })" class="btn btn-outline-light">
+                                        Rimuovi dal carrello
+                                    </a>
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
 
+
+            <div class="col-12">
+                <div class="container bg-light bg-opacity-25 p-3 mx-5 my-1 rounded rounded-3 d-flex justify-content-end align-items-baseline">
+                    <h4 class="px-2 ">Totale: </h4>
+                    <p> @Model.Sum(x => x.Item1.Prezzo * x.Item2) euro</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="container d-flex justify-content-center p-5">
+
+
+                <a href="@Url.Action("Checkout", "Cart")" class="btn btn-outline-light">
+                    Procedi al pagamento
+                </a>
+
+            </div>
+
+        </div>
     </div>
-</div>
+}
+
+
 

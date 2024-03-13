@@ -90,6 +90,7 @@ namespace EsercizioSettimana11Marzo.Controllers
         {
             FormsAuthentication.SignOut();
             Roles.RemoveUserFromRole(User.Identity.Name, Roles.GetRolesForUser(User.Identity.Name).First());
+            Session.Clear();
             //ti riporta alla pagina dove ti trovavi
             return Redirect(Request.UrlReferrer.ToString());
         }
