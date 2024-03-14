@@ -59,5 +59,74 @@ namespace EsercizioSettimana11Marzo.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult CheckoutForm()
+        {
+            if (Session["Cart"] != null)
+            {
+                return View();
+            }else
+            {
+                return RedirectToAction("Index");
+            }
+           
+        }
+
+        public ActionResult Checkout(string indirizzo, string note)
+        {
+            
+            var cart = Session["Cart"] as List<Tuple<Articolo, int>>;
+            if (cart != null && cart.Any())
+            {
+                var ordine = new Ordine
+                {
+                    TotaleOrdine = cart.Sum(x => x.Item1.Prezzo * x.Item2),
+                    DataOrdine = DateTime.Now.Date,
+                    IsEvaso = false,
+                    IdUtente = (int)(db.Utentes.FirstOrDefault(u => u.Username == User.Identity.Name)?.IdUtente),
+                    Indirizzo= indirizzo,
+                    Note = note
+
+                };
+                db.Ordines.Add(ordine);
+                db.SaveChanges();
+
+                var dettagliOrdine = cart.Select(x => new DettaglioOrdine
+                {
+                    IdArticolo = x.Item1.IdArticolo,
+                    IdOrdine = ordine.IdOrdine,
+                    Quantita = x.Item2
+                }).ToList();
+
+                foreach (var dettaglio in dettagliOrdine)
+                {
+                    db.DettaglioOrdines.Add(dettaglio);
+                }
+
+                db.SaveChanges();
+
+                Session.Clear();
+                Session["OrderSaved"] = true;
+
+
+                return RedirectToAction("ConclusioneOrdine");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult ConclusioneOrdine()
+        {
+            if (Session["OrderSaved"] != null && (bool)Session["OrderSaved"])
+            {
+                Session.Clear();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+           
     }
 }

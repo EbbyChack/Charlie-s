@@ -1,0 +1,72 @@
+﻿@model IEnumerable<EsercizioSettimana11Marzo.Models.Ordine>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Ordini</h2>
+
+
+<table class="table bg-white bg-opacity-75 m-3 rounded-3">
+    <tr>
+        <th>
+            Utente
+        </th>
+        <th>
+            Totale ordine
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Indirizzo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th>
+           Ordine evaso
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataOrdine)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Utente.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotaleOrdine) euro
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Indirizzo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                
+                @if (item.IsEvaso == true)
+                {
+                    <i class="fa fa-check"></i>
+                }
+                else
+                {
+                    <i class="fa fa-times"></i>
+                    }
+            </td>
+            <td>
+                @String.Format("{0:dd/MM/yyyy}", item.DataOrdine)
+            </td>
+            <td>
+
+                <a href="@Url.Action("Edit", new { id = item.IdOrdine })" class="text-dark">
+                    <i class="fa fa-edit"></i>
+                </a>
+
+            </td>
+        </tr>
+    }
+
+</table>

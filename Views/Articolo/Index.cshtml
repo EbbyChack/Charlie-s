@@ -10,6 +10,15 @@
         opacity: 100%;
         transition: all ease-in-out 0.5s;
     }
+    .Custom {
+        transform: scale(1);
+        transition: all ease-in-out 0.5s;
+    }
+
+        .Custom:hover {
+            transform: scale(1.1);
+            transition: all ease-in-out 0.5s;
+        }
 </style>
 
 <h2>Modifica articoli</h2>
@@ -19,7 +28,7 @@
 </p>
 
 <div class="container">
-    <div class="row">
+    <div class="row g-4">
         @foreach (var item in Model)
         {
             <div class="col-3">

@@ -27,6 +27,7 @@ namespace EsercizioSettimana11Marzo.Models
 
         public decimal Prezzo { get; set; }
 
+        [Display(Name = "Tempi di consegna")]
         public int TempiDiConsegna { get; set; }
 
         [Required]

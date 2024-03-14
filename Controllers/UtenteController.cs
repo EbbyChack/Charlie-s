@@ -51,7 +51,15 @@ namespace EsercizioSettimana11Marzo.Controllers
 
         public ActionResult Login()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View();
+            }
+           
         }
 
         [HttpPost]
@@ -64,8 +72,9 @@ namespace EsercizioSettimana11Marzo.Controllers
                     var utenteLoggato = db.Utentes.Where(u => u.Username == utente.Username && u.Password == utente.Password).FirstOrDefault();
                     if (utenteLoggato != null)
                     {
-                        FormsAuthentication.SetAuthCookie(utente.Username, false);
-                        //Session["Role"] = utenteLoggato.TipoUtente;
+                        string Maiuscolo = char.ToUpper(utente.Username[0]) + utente.Username.Substring(1);
+                        FormsAuthentication.SetAuthCookie(Maiuscolo, false);
+                        
                         if (!Roles.RoleExists(utenteLoggato.TipoUtente))
                         {
                             Roles.CreateRole(utenteLoggato.TipoUtente);
@@ -92,7 +101,7 @@ namespace EsercizioSettimana11Marzo.Controllers
             Roles.RemoveUserFromRole(User.Identity.Name, Roles.GetRolesForUser(User.Identity.Name).First());
             Session.Clear();
             //ti riporta alla pagina dove ti trovavi
-            return Redirect(Request.UrlReferrer.ToString());
+            return RedirectToAction("Index", "Home");
         }
 
 

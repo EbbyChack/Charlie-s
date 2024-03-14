@@ -1,0 +1,81 @@
+﻿
+
+<h2>Operazioni</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="bg-light bg-opacity-25 p-3 rounded-3 ">
+                <h5>Totale ordine evasi:</h5>
+                <p id="TotaleOrdini"></p>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="bg-light bg-opacity-25 p-3 rounded-3">
+                <h5>Ricerca incasso totale per data:</h5>
+                @using (Html.BeginForm("TotaleIncasso", "Operazioni", FormMethod.Post))
+                {
+                    <div class="d-flex align-items-center">
+                        <div class="form-group me-1">
+                            <div class="form-group">
+
+                                <input type="date" class="form-control" id="data" name="data">
+                            </div>
+                        </div>
+
+                        <button type="submit" id="DataCerca" class="btn btn-outline-light">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                   
+                }
+
+            <div id="results" class="my-2" style="display:none">
+                <h3>Totale:</h3>
+                <h6 id="TotaleIncasso"></h6>
+
+
+            </div>
+
+                
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@*chiamata ajax per ottenere il totale degli ordini evasi*@
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/Operazioni/OrdiniEvasi',
+                type: 'GET',
+                success: function (data) {
+                    $('#TotaleOrdini').text(data);
+                }
+            });
+        });
+    </script>
+
+    @*chiamata ajax per ottenere il totale dell'incasso per una data specifica*@
+    <script>
+        $('#DataCerca').click(function (e) {
+            e.preventDefault();
+            var date = $('#data').val();
+            $.ajax({
+                url: '/Operazioni/TotaleIncasso',
+                type: 'POST',
+                data: { date: date },
+                success: function (data) {
+                    $('#TotaleIncasso').text(data + ' euro');
+                    $('#results').show();
+                }
+            });
+        });
+
+    </script>
+}
+
+
+

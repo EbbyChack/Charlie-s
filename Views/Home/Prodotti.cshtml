@@ -17,16 +17,23 @@
         color: white;
         background-color: #ffffff2c;
     }
+
+    .Custom {
+        transform: scale(1);
+        transition: all ease-in-out 0.5s;
+    }
+        .Custom:hover {
+            transform: scale(1.1);
+            transition: all ease-in-out 0.5s;
+        }
 </style>
 
 <h2>Menù</h2>
 
-<p class="text-end">
-    @Html.ActionLink("Aggiungi", "Create", null, new { @class = "btn btn-outline-light" })
-</p>
 
-<div class="container">
-    <div class="row">
+
+<div class="container mt-4">
+    <div class="row g-4">
         @foreach (var item in Model)
         {
             <div class="col-3">

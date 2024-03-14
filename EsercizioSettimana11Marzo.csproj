@@ -132,6 +132,8 @@
     <Compile Include="Controllers\ArticoloController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OperazioniController.cs" />
+    <Compile Include="Controllers\OrdineController.cs" />
     <Compile Include="Controllers\UtenteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -202,6 +204,11 @@
     <Content Include="Views\Utente\Login.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Home\Prodotti.cshtml" />
+    <Content Include="Views\Ordine\Edit.cshtml" />
+    <Content Include="Views\Ordine\Index.cshtml" />
+    <Content Include="Views\Cart\CheckoutForm.cshtml" />
+    <Content Include="Views\Cart\ConclusioneOrdine.cshtml" />
+    <Content Include="Views\Operazioni\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

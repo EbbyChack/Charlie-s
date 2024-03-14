@@ -6,38 +6,42 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-   <style>
-       .background {
-           position: absolute;
-           top: 0;
-           left: 0;
-           width: 100%;
-           min-height: 100%;
-           background-image: url("https://www.1950americandiner.it/media/mobile/home-slide-03.jpg");
-           background-size: cover;
-           -webkit-backdrop-filter: inherit;
-           backdrop-filter: blur(100px) saturate(60%);
-           
-       }
-       #logo {
-           width: 5.5em;
-           filter: saturate(50%) 
-       }
-       .customNav {
-           background-color: #84283E;
-           background: linear-gradient(180deg, hsla(344, 77%, 70%, 1) 0%, hsla(330, 24%, 53%, 1) 100%);
-       }
-   </style>
-      
-   
+    <style>
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100%;
+            background-image: url("https://www.1950americandiner.it/media/mobile/home-slide-03.jpg");
+            background-size: cover;
+            -webkit-backdrop-filter: inherit;
+            backdrop-filter: blur(100px) saturate(60%);
+        }
+
+        #logo {
+            width: 5.5em;
+            filter: saturate(50%)
+        }
+
+        .customNav {
+            background: linear-gradient(0deg, hsla(0, 0%, 0%, 1) 0%, hsl(0, 0%, 13%) 100%);
+            border-bottom: 1px ridge #ffffffff;
+            
+        }
+    </style>
+
+
 </head>
 <body class="background text-light">
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark customNav">
         <div class="container">
-            <a href="@Url.Action("Index", "Home", new { area = "" })" class="navbar-brand">
-                
-                <img src="https://assets-global.website-files.com/60749699ffd76a662120d3a3/609930020cc75a2fd0ba0a93_Charlies.png" alt="Charlie's" id="logo"/>
+            <a href="@Url.Action("Index", "Home", new { area = "" })" class="navbar-brand p-0">
+
+              
+                <h3 class="fw-bolder m-1 px-2 py-1 border border-3 border-light rounded-1">Charlie's</h3>
             </a>
 
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
@@ -50,12 +54,14 @@
                     @if (User.Identity.IsAuthenticated && Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
                     {
                         <li>@Html.ActionLink("Modifica Articoli", "Index", "Articolo", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Ordini", "Index", "Ordine", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Operazioni", "Index", "Operazioni", new { area = "" }, new { @class = "nav-link" })</li>
                     }
 
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Menù", "Prodotti", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        
+
                     }
 
                 </ul>
@@ -65,19 +71,21 @@
                 {
 
                     <ul class="navbar-nav d-flex jus align-items-center">
-                        <li> <span class="text-white fw-bold px-2 ">Ciao @User.Identity.Name</span></li>
-                        <li><a href="@Url.Action("Index", "Cart", new { area = "" })" class="nav-link">Carrello <i class="fas fa-shopping-cart"></i></a></li>
+                        <li> <span class="text-white fw-bold ">Ciao @User.Identity.Name</span></li>
+                        <li><a href="@Url.Action("Index", "Cart", new { area = "" })" class="nav-link px-3">Carrello <i class="fas fa-shopping-cart"></i></a></li>
 
+                        <li><a href="@Url.Action("Logout", "Utente", new { area = "" })" class="nav-link px-3">Logout <i class="fas fa-sign-out-alt"></i></a></li>
 
-                        <li>@Html.ActionLink("Logout", "Logout", "Utente", new { area = "" }, new { @class = "nav-link btn btn-light py-1 text-black rounded-2" })</li>
+                        
 
                     </ul>
                 }
                 else
                 {
-                    <ul class="navbar-nav">
-                        <li>@Html.ActionLink("Login", "Login", "Utente", new { area = "" }, new { @class = "nav-link btn btn-light py-1 text-black rounded-2" })</li>
-                    </ul>
+            <ul class="navbar-nav">
+               
+                <li><a href="@Url.Action("Login", "Utente", new { area = "" })" class="nav-link px-3">Login <i class="fas fa-sign-in-alt"></i></a></li>
+            </ul>
                 }
 
 
@@ -94,6 +102,11 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
