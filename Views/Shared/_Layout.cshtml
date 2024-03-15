@@ -6,31 +6,10 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link rel="stylesheet" href="~/Content/StyleSheet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            min-height: 100%;
-            background-image: url("https://www.1950americandiner.it/media/mobile/home-slide-03.jpg");
-            background-size: cover;
-            -webkit-backdrop-filter: inherit;
-            backdrop-filter: blur(100px) saturate(60%);
-        }
-
-        #logo {
-            width: 5.5em;
-            filter: saturate(50%)
-        }
-
-        .customNav {
-            background: linear-gradient(0deg, hsla(0, 0%, 0%, 1) 0%, hsl(0, 0%, 13%) 100%);
-            border-bottom: 1px ridge #ffffffff;
-            
-        }
+      
     </style>
 
 
@@ -54,7 +33,7 @@
                     @if (User.Identity.IsAuthenticated && Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
                     {
                         <li>@Html.ActionLink("Modifica Articoli", "Index", "Articolo", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Ordini", "Index", "Ordine", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Gestione Ordini", "Index", "Ordine", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Operazioni", "Index", "Operazioni", new { area = "" }, new { @class = "nav-link" })</li>
                     }
 
@@ -73,10 +52,11 @@
                     <ul class="navbar-nav d-flex jus align-items-center">
                         <li> <span class="text-white fw-bold ">Ciao @User.Identity.Name</span></li>
                         <li><a href="@Url.Action("Index", "Cart", new { area = "" })" class="nav-link px-3">Carrello <i class="fas fa-shopping-cart"></i></a></li>
+                        <li><a href="@Url.Action("OrdiniUtente", "Home", new { area = "" })" class="nav-link px-3">Ordini <i class="fas fa-clipboard-list"></i></a></li>
 
                         <li><a href="@Url.Action("Logout", "Utente", new { area = "" })" class="nav-link px-3">Logout <i class="fas fa-sign-out-alt"></i></a></li>
 
-                        
+
 
                     </ul>
                 }
@@ -96,7 +76,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Charlie's</p>
         </footer>
     </div>
 

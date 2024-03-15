@@ -9,7 +9,7 @@
 
 <table class="table bg-white bg-opacity-75 m-3 rounded-3">
     <tr>
-        <th>
+        <th class="ps-5">
             Utente
         </th>
         <th>
@@ -33,7 +33,7 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td class="ps-5">
                 @Html.DisplayFor(modelItem => item.Utente.Username)
             </td>
             <td>

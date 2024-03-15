@@ -4,53 +4,63 @@
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
 
+<div class="d-flex flex-column align-items-center ">
+    <h2 class="">Login</h2>
+    <div class="d-flex justify-content-center bg-light bg-opacity-25 px-4 py-5 mt-2 rounded-3">
 
-
-@using (Html.BeginForm("Login", "Utente", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-
-        @if (!String.IsNullOrEmpty(ViewBag.Error))
+        @using (Html.BeginForm("Login", "Utente", FormMethod.Post))
         {
-            <div class="alert alert-danger">
-                @ViewBag.Error
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @*per mostrare un messaggio di errore*@
+                @if (!String.IsNullOrEmpty(ViewBag.Error))
+                {
+                    <div class="alert alert-danger py-2">
+                        @ViewBag.Error
+                    </div>
+                }
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control quantitaForm", style = "width:15em" } })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control quantitaForm", type = "password" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10 mt-5">
+                            <input type="submit" value="Login" class="btn btn-outline-light mb-3" />
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
+
+
+            <div class="d-flex justify-content-center">
+                @Html.ActionLink("Registrati", "Create", "Utente", new { area = "" }, new { @class = "text-light text-center " })
+            </div>
+
         }
-
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10 mt-3">
-                <input type="submit" value="Login" class="btn btn-outline-light mb-3" />
-            </div>
-        </div>
     </div>
+</div>
 
-   
 
-    @Html.ActionLink("Registrati", "Create", "Utente", new { area = "" }, new { @class = "text-light " })
-}
 
 
 

@@ -1,58 +1,37 @@
 ﻿@model EsercizioSettimana11Marzo.Models.Articolo
 
-@{
-    ViewBag.Title = "Details";
-}
 
-<h2>Details</h2>
 
-<div>
-    <h4>Articolo</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
+<h2>Dettagli</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Immagine)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Immagine)
-        </dd>
+<div class="col-12">
+    <div class="container bg-light bg-opacity-25 p-3 mx-3 my-1 rounded rounded-3">
+        <div class="row">
+            <div class="col-4 ">
+                <img class="w-100 rounded rounded-3" src="~/Images/@Model.Immagine" alt="@Model.IdArticolo" style="height:35em; object-fit:cover">
+            </div>
+            <div class="col-8 d-flex flex-column justify-content-between position-relative">
+                <div class="bg-dark bg-opacity-25 py-2 px-4 rounded rounded-3">
+                    <h4 class=" text-decoration-underline ">@Model.Nome</h4>
+                    <b>Prezzo: </b> <p>@Model.Prezzo €</p>
+                    <b>Ingredienti: </b> <p> @Model.Ingredienti</p>
+                    <b>Tempi di consegna: </b><p> @Model.TempiDiConsegna minuti</p>
+                </div>
+                <div class="position-absolute end-0 bottom-0 me-4" >
+                    <a href="@Url.Action("Edit", new { id = @Model.IdArticolo })" class="btn btn-outline-light">
+                        <i class="fa fa-edit"></i>
+                    </a>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Prezzo)
-        </dt>
+                    <a href="@Url.Action("Delete", new { id = @Model.IdArticolo })" class="btn btn-outline-light">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+           
 
-        <dd>
-            @Html.DisplayFor(model => model.Prezzo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TempiDiConsegna)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TempiDiConsegna)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ingredienti)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ingredienti)
-        </dd>
-
-    </dl>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdArticolo }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

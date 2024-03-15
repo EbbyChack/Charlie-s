@@ -1,32 +1,6 @@
 ﻿@model IEnumerable<EsercizioSettimana11Marzo.Models.Articolo>
-@*TOGLIERE LO STILE DA QUI*@
-<style>
-    .hoverCard {
-        opacity: 1%;
-        transition: all ease-in-out 0.5s;
-    }
 
-    .Custom:hover .hoverCard {
-        opacity: 100%;
-        transition: all ease-in-out 0.5s;
-    }
-    .quantitaForm {
-        border-radius: 4px;
-        border: none;
-        padding: 6.5px;
-        color: white;
-        background-color: #ffffff2c;
-    }
 
-    .Custom {
-        transform: scale(1);
-        transition: all ease-in-out 0.5s;
-    }
-        .Custom:hover {
-            transform: scale(1.1);
-            transition: all ease-in-out 0.5s;
-        }
-</style>
 
 <h2>Menù</h2>
 
@@ -39,13 +13,13 @@
             <div class="col-3">
                 <div class="card Custom border border-0">
 
-                    <img class="card-img " src="@item.Immagine" alt="@item.IdArticolo" style=" height:25em; object-fit:cover">
+                    <img class="card-img " src="~/Images/@item.Immagine" alt="@item.IdArticolo" style=" height:25em; object-fit:cover">
                     <div class="card-img-overlay align-bottom">
                         <h5 class="card-title text-white bg-dark bg-opacity-50 d-inline px-2 py-1 rounded-pill  ">@item.Nome</h5>
 
                         <div class="hoverCard card-body my-3 text-white bg-dark bg-opacity-75 px-2 py-3 rounded-3 d-flex flex-column justify-content-center align-items-center">
                             <div>
-                                <b>Prezzo: </b> <p>@item.Prezzo</p>
+                                <b>Prezzo: </b> <p>@item.Prezzo €</p>
                                 <b>Ingredienti: </b> <p> @item.Ingredienti</p>
                                 <b>Tempi di consegna: </b><p> @item.TempiDiConsegna minuti</p>
                             </div>

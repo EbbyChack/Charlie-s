@@ -1,0 +1,60 @@
+﻿
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background-image: url("https://www.1950americandiner.it/media/mobile/home-slide-03.jpg");
+    background-size: cover;
+    -webkit-backdrop-filter: inherit;
+    backdrop-filter: blur(100px) saturate(60%);
+}
+
+#logo {
+    width: 5.5em;
+    filter: saturate(50%)
+}
+
+.customNav {
+    background: linear-gradient(0deg, hsla(0, 0%, 0%, 1) 0%, hsl(0, 0%, 13%) 100%);
+    border-bottom: 1px ridge #ffffffff;
+}
+
+.hoverCard {
+    opacity: 1%;
+    transition: all ease-in-out 0.5s;
+}
+
+.Custom:hover .hoverCard {
+    opacity: 100%;
+    transition: all ease-in-out 0.5s;
+}
+
+.Custom {
+    transform: scale(1);
+    transition: all ease-in-out 0.5s;
+}
+
+    .Custom:hover {
+        transform: scale(1.1);
+        transition: all ease-in-out 0.5s;
+    }
+#HomePage > * {
+    transform: translateY(50%);
+    opacity: 0;
+    transition: transform 1s ease,opacity 1.5s ease;
+    transition-delay: 0.3s;
+}
+
+#HomePage.active > * {
+    opacity: 1;
+    transform: translateY(0);
+}
+.quantitaForm {
+    border-radius: 4px;
+    border: none;
+    padding: 6.5px;
+    color: white;
+    background-color: #ffffff2c;
+}

@@ -163,15 +163,25 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\StyleSheet.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\burritochili.jpg" />
+    <Content Include="Images\burrittopollo.jpg" />
+    <Content Include="Images\charlieburger.jpg" />
+    <Content Include="Images\chickenburger.jpg" />
+    <Content Include="Images\friedchicken.jpg" />
+    <Content Include="Images\pizzapeperoni.jpg" />
+    <Content Include="Images\tacosmanzo.jpg" />
+    <Content Include="Images\veganburger.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="DB BACKUP\EsercizioSettimana11Marzo.bak" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -209,6 +219,7 @@
     <Content Include="Views\Cart\CheckoutForm.cshtml" />
     <Content Include="Views\Cart\ConclusioneOrdine.cshtml" />
     <Content Include="Views\Operazioni\Index.cshtml" />
+    <Content Include="Views\Home\OrdiniUtente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

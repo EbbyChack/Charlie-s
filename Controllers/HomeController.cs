@@ -31,6 +31,20 @@ namespace EsercizioSettimana11Marzo.Controllers
 
         }
 
+        public ActionResult OrdiniUtente()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var OrdiniUtente = db.Ordines.Where(o => o.Utente.Username == User.Identity.Name);
+                return View(OrdiniUtente.ToList());
+
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
         
 
        

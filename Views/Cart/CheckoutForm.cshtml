@@ -1,20 +1,26 @@
 ﻿
-@{
-    ViewBag.Title = "CheckoutForm";
-}
 
-<h2>CheckoutForm</h2>
+<div class="d-flex flex-column align-items-center ">
+    <h2>Inserisci dettagli</h2>
 
-@using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
-{
-    <div class="form-group">
-        <label for="indirizzo">Indirizzo</label>
-        <input type="text" class="form-control" id="indirizzo" name="indirizzo" required>
+    <div class="d-flex justify-content-center bg-light bg-opacity-25 px-4 py-5 mt-2 rounded-3">
+        @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+        {
+            <div class="form-group">
+                <label for="indirizzo">Indirizzo</label>
+                <input type="text" class="form-control quantitaForm" id="indirizzo" name="indirizzo"  style = "width:19em"  required>
+            </div>
+            <div class="form-group">
+                <label for="note">Note</label>
+                <textarea class="form-control quantitaForm" id="note" name="note" required></textarea>
+            </div>
+            <div  class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-outline-light mt-3 ">Procedi</button>
+            </div>
+           
+        }
     </div>
-    <div class="form-group">
-        <label for="note">Note</label>
-        <textarea class="form-control" id="note" name="note" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-outline-light mt-3">Procedi al pagamento</button>
-}
+   
+</div>
+
 
