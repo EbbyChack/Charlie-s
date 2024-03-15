@@ -11,18 +11,21 @@ namespace EsercizioSettimana11Marzo.Controllers
     {
         private ModelDbContext db = new ModelDbContext();
         // GET: Operazioni
+        //Verifica se l'utente è loggato e se è un admin
         [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View();
         }
 
+        //Metodo per restituire il totale degli ordini evasi
         public JsonResult OrdiniEvasi()
         {
             var TotaleOrdiniEvasi = db.Ordines.Where(x => x.IsEvaso == true).Count();
             return Json(TotaleOrdiniEvasi, JsonRequestBehavior.AllowGet);
         }
 
+        //Metodo per restituire l'incasso totale
         [HttpPost]
         public JsonResult TotaleIncasso(DateTime date)
         {

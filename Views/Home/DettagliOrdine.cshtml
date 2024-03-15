@@ -1,0 +1,95 @@
+﻿@model Tuple<List<EsercizioSettimana11Marzo.Models.DettaglioOrdine>, List<EsercizioSettimana11Marzo.Models.Articolo>, EsercizioSettimana11Marzo.Models.Ordine>
+
+<h2>Dettagli Ordine</h2>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class=" container bg-light bg-opacity-25 p-3 rounded-3 mx-5">
+
+
+                <div class="row justify-content-between">
+                    <div class="col-9 d-flex align-items-center">
+
+                        <div class="fs-2">
+                            <b>Id:</b>
+                            @Html.DisplayFor(modelItem => @Model.Item3.IdOrdine)
+                        </div>
+
+
+                    </div>
+                    <div class="col-3">
+                        <div class="ms-5">
+                            <div>
+                                <b>Indirizzo:</b>
+                                @Html.DisplayFor(modelItem => @Model.Item3.Indirizzo)
+                            </div>
+                            <div>
+                                <b>Data ordine:</b>
+                                @String.Format("{0:dd/MM/yyyy}", @Model.Item3.DataOrdine)
+                            </div>
+                            <div>
+                                <b>Note:</b>
+                                @Html.DisplayFor(modelItem => @Model.Item3.Note)
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+        @foreach (var dettaglio in Model.Item1)
+        {
+            var articolo = Model.Item2.FirstOrDefault(a => a.IdArticolo == dettaglio.IdArticolo);
+            if (articolo != null)
+            {
+                <div class="col-12">
+                    <div class="container bg-light bg-opacity-25 p-3 mx-5 my-1 rounded rounded-3">
+                        <div class="row">
+                            <div class="col-3">
+                                <img class="w-100 rounded rounded-3" src="~/Images/@articolo.Immagine" alt="@articolo.IdArticolo" style="height:15em; object-fit:cover">
+                            </div>
+                            <div class="col-6">
+                                <div class="bg-dark bg-opacity-25 py-2 px-4 rounded rounded-3">
+                                    <h4 class=" text-decoration-underline ">@articolo.Nome</h4>
+                                    <b>Prezzo: </b> <p>@articolo.Prezzo €</p>
+                                    <b>Ingredienti: </b> <p> @articolo.Ingredienti</p>
+                                    <b>Tempi di consegna: </b><p> @articolo.TempiDiConsegna minuti</p>
+                                </div>
+                            </div>
+                            <div class="col-3 d-flex justify-content-center align-items-center">
+                                <div class="">
+                                    <p class="text-center m-4">Quantità: @dettaglio.Quantita</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+       
+        <div class="col-12">
+            <div class="container fs-3 p-3 mx-5 my-1 rounded rounded-3 d-flex justify-content-end align-items-baseline">
+                <h3 class="px-2 ">Totale: </h3>
+                @Html.DisplayFor(modelItem => @Model.Item3.TotaleOrdine) euro
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+    
+
+
+
+</div>
+

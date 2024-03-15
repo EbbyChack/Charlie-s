@@ -16,7 +16,7 @@
             <div class="col-12">
                 <div class="container bg-light bg-opacity-25 p-3 rounded-3">
                     <div class="row">
-                        <div class="col-4 d-flex align-items-center">
+                        <div class="col-3 d-flex align-items-center">
 
                             <div class="fs-2">
                                 <b>Id:</b>
@@ -39,9 +39,9 @@
                                     <b>Note:</b>
                                     @Html.DisplayFor(modelItem => item.Note)
                                 </div>
-                                
-                                
-                                
+
+
+
 
                             </div>
 
@@ -50,7 +50,10 @@
                             <b class="me-2">Totale: </b>
                             @Html.DisplayFor(modelItem => item.TotaleOrdine) euro
                         </div>
+                        <div class="col-1 d-flex align-items-center text-white">
+                            @Html.ActionLink("Dettagli", "DettagliOrdine", "Home", new { id = item.IdOrdine}, new { @class = "text-light" })
 
+                        </div>
                     </div>
                 </div>
 

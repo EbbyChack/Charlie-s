@@ -20,6 +20,7 @@ namespace EsercizioSettimana11Marzo.Controllers
         
         public ActionResult Index()
         {
+            //Controllo se l'utente è loggato e se è admin
             if (Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
             {
                 return View(db.Articoloes.ToList());
@@ -34,13 +35,17 @@ namespace EsercizioSettimana11Marzo.Controllers
         // GET: Articolo/Details/5
         public ActionResult Details(int? id)
         {
+            //Controllo se l'utente è loggato e se è admin
             if (Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
             {
                 if (id == null)
                 {
+                    //Se l'id è nullo ritorno un errore
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
+                //Cerco l'articolo con l'id passato
                 Articolo articolo = db.Articoloes.Find(id);
+                //Se l'articolo non esiste ritorno un errore
                 if (articolo == null)
                 {
                     return HttpNotFound();
@@ -57,6 +62,7 @@ namespace EsercizioSettimana11Marzo.Controllers
         // GET: Articolo/Create
         public ActionResult Create()
         {
+            //Controllo se l'utente è loggato e se è admin
             if (Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
             {
                 return View();
@@ -75,6 +81,7 @@ namespace EsercizioSettimana11Marzo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "IdArticolo,Nome,Immagine,Prezzo,TempiDiConsegna,Ingredienti")] Articolo articolo)
         {
+            //Controllo se l'utente è loggato e se è admin
             if (Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
             {
                 if (ModelState.IsValid)
@@ -96,6 +103,7 @@ namespace EsercizioSettimana11Marzo.Controllers
         // GET: Articolo/Edit/5
         public ActionResult Edit(int? id)
         {
+            //Controllo se l'utente è loggato e se è admin
             if (Roles.IsUserInRole(User.Identity.Name, "ADMIN"))
             {
                 if (id == null)
@@ -127,7 +135,9 @@ namespace EsercizioSettimana11Marzo.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    //Cambio lo stato dell'articolo a modificato
                     db.Entry(articolo).State = EntityState.Modified;
+                    //Salvo le modifiche
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }

@@ -18,6 +18,7 @@ namespace EsercizioSettimana11Marzo.Controllers
         // GET: Ordine
         public ActionResult Index()
         {
+            //Visualizza tutti gli ordini
             var ordines = db.Ordines.Include(o => o.Utente);
             return View(ordines.ToList());
         }

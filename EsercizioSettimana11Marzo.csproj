@@ -173,6 +173,9 @@
     <Content Include="Images\chickenburger.jpg" />
     <Content Include="Images\friedchicken.jpg" />
     <Content Include="Images\pizzapeperoni.jpg" />
+    <Content Include="Images\SLIDE1.jpg" />
+    <Content Include="Images\SLIDE2.jpg" />
+    <Content Include="Images\SLIDE3.jpg" />
     <Content Include="Images\tacosmanzo.jpg" />
     <Content Include="Images\veganburger.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -220,6 +223,7 @@
     <Content Include="Views\Cart\ConclusioneOrdine.cshtml" />
     <Content Include="Views\Operazioni\Index.cshtml" />
     <Content Include="Views\Home\OrdiniUtente.cshtml" />
+    <Content Include="Views\Home\DettagliOrdine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

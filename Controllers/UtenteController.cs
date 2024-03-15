@@ -51,6 +51,7 @@ namespace EsercizioSettimana11Marzo.Controllers
 
         public ActionResult Login()
         {
+            //se l'utente è già loggato lo manda alla home
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
@@ -65,13 +66,17 @@ namespace EsercizioSettimana11Marzo.Controllers
         [HttpPost]
         public ActionResult Login(Utente utente)
         {
+            
             if (ModelState.IsValid)
             {
                 try
                 {
+                    //cerca l'utente nel db
                     var utenteLoggato = db.Utentes.Where(u => u.Username == utente.Username && u.Password == utente.Password).FirstOrDefault();
                     if (utenteLoggato != null)
                     {
+                        //crea un cookie di autenticazione e reindirizza alla home page 
+                        //il nome utente viene messo in maiuscolo
                         string Maiuscolo = char.ToUpper(utente.Username[0]) + utente.Username.Substring(1);
                         FormsAuthentication.SetAuthCookie(Maiuscolo, false);
                         
@@ -84,6 +89,7 @@ namespace EsercizioSettimana11Marzo.Controllers
                     }
                     else
                     {
+                        //se l'utente non esiste o la password è sbagliata
                         ViewBag.Error = "Username o password errati";
                     }
                 }
@@ -97,8 +103,11 @@ namespace EsercizioSettimana11Marzo.Controllers
 
         public ActionResult Logout()
         {
+            //elimina il cookie di autenticazione
             FormsAuthentication.SignOut();
+            //elimina l'utente dal ruolo
             Roles.RemoveUserFromRole(User.Identity.Name, Roles.GetRolesForUser(User.Identity.Name).First());
+            //elimina tutte le sessioni per svuotare il carrello
             Session.Clear();
             //ti riporta alla pagina dove ti trovavi
             return RedirectToAction("Index", "Home");
